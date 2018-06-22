@@ -22,7 +22,12 @@
   l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
   a = add
-  ap = add -p
+  ap = add --patch
+
+  amend = commit --amend -c HEAD
+  amendc = commit --amend -C HEAD
+
+  alias = "!git config -l | grep alias | cut -c 7-"
 
   b = branch
   # delete local branches except master
@@ -40,11 +45,15 @@
   ds = diff --stat
   dc = diff --cached
 
+  rh = reset --hard HEAD
+
   s = status
+
+  sp = stash pop
+  ss = stash save -u
+
   co = checkout
   cob = checkout -b
-  # list aliases
-  ha = "!git config -l | grep alias | cut -c 7-"
 
   p = pull
   ps = push

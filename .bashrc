@@ -1,12 +1,12 @@
 # Enable programmable completion feature
 if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
   for f in $(brew --prefix)/etc/bash_completion.d/*; do
-    echo $f
     [ -f "$f" ] && source "$f"
   done
 fi
 
 # Set the PS1 prompt
+
 export PS1="\[\033[31m\]\u \[\033[32m\]\w\[\033[33m\]\$(__git_ps1)\[\033[00m\] \n $ "
 
 # Add bash aliases.
