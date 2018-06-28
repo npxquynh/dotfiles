@@ -32,7 +32,10 @@ alias dc='docker-compose'
 alias W='cd ~/Work'
 
 function bo () {
-  source .env;
+  source ~/Work/bosi_$1/.env;
   cd ~/Work/bosi_$1;
 }
+
+alias cv='cd ~/Job/CV/cv'
+alias cl='cd ~/Job/CV/cl'
 
