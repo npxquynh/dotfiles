@@ -48,7 +48,8 @@
 
     # one-line log
     l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(red)%d\\ %Creset%s\\ %Cblue\\ [%cn]" --decorate --date=format:'%a_%d_%m %H:%M'
-    lf = log
+    # Doesn't work yet
+    # lfind = "!git log --all --grep=\"$1\""
     lg = log --pretty=format:"%h\\ %s" --oneline --graph --decorate --color
     lh = log -1
 
