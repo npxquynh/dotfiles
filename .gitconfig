@@ -1,60 +1,93 @@
-[core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
-[color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 227
-	frag = magenta bold
-	commit = 227 bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
 [user]
 	name = Quynh Nguyen
 	email = quynh.xq@gmail.com
+
+# https://gist.github.com/pksunkara/988716
+[color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
+
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+
+[core]
+    pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /Users/quynhnguyen/.gitignore_global
+
 [alias]
-  # one-line log
-  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    a = add
+    ap = add -p
 
-  a = add
-  ap = add --patch
+    # list branches sorted by last modified
+    b = branch
+    b2 = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+    bd = "!git branch | grep -v 'master' | xargs git branch -D"
+    # Delete all remote tracking branches for all remotes.
+    bd-remote = "!git branch -r | grep -v master|HEAD | xargs -L 1 git branch -rD"
 
-  amend = commit --amend -c HEAD
-  amendc = commit --amend -C HEAD
 
-  alias = "!git config -l | grep alias | cut -c 7-"
+    # Remove ignored files
+    clean = clean -n
 
-  b = branch
-  # delete local branches except master
-  bd = "!git branch | grep -v master | xargs git branch -d"
-  # delete remote tracking branches except master
-  # bd-remote = "!git branch -r | grep -v master|HEAD | xargs git branch -d -r"
+    c = commit --verbose
+    ca = commit -a --verbose
+    camend = commit --amend --verbose
+    cm = commit -m
+    cam = commit -a -m
 
-  c = commit --verbose
-  ca = commit -a --verbose
-  cm = commit -m
-  cam = commit -a -m
-  m = commit --amend --verbose
-  
-  d = diff
-  ds = diff --stat
-  dc = diff --cached
+    co = checkout
+    cob = checkout -b
 
-  rh = reset --hard HEAD
+    d = diff
+    ds = diff --stat
+    dc = diff --cached
+    dh = diff HEAD~1
 
-  s = status
+    # one-line log
+    l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(red)%d\\ %Creset%s\\ %Cblue\\ [%cn]" --decorate --date=format:'%a_%d_%m %H:%M'
+    lf = log
+    lg = log --pretty=format:"%h\\ %s" --oneline --graph --decorate --color
+    lh = log -1
 
-  sp = stash pop
-  ss = stash save -u
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
 
-  co = checkout
-  cob = checkout -b
 
-  p = pull
-  ps = push
+    p = pull 
+    ps = push
+    psu = !git push --set-upstream origin `git symbolic-ref --short HEAD`
 
+    s = status -s
+    sh = show
+    
+    rh = reset HEAD
+    rhh = reset --hard HEAD
+    rhh1 = reset --hard HEAD^1
+
+[diff]
+	tool = diffmerge
+
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/quynhnguyen/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/quynhnguyen/.stCommitMsg
