@@ -13,8 +13,8 @@ export PS1="\[\033[31m\]\u \[\033[32m\]\w\[\033[33m\]\$(__git_ps1)\[\033[00m\] \
 # Add environment variables.
 [ -f ~/.bash_env ] && . ~/.bash_env
 
-# Add identity always for ssh
-ssh-add ~/.ssh/id_rsa
+# Uncomment to add identity always for ssh
+# ssh-add ~/.ssh/id_rsa
 
 # Prevent Ctrl+D from closing shell. Now you have to type 42 times
 export IGNOREEOF=42
