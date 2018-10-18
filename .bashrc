@@ -33,8 +33,9 @@ shopt -s histappend
 # instead of after closing the session.
 PROMPT_COMMAND=`history -a`
 
-# Set the iTerm tab title to the current directory
+# Set the iTerm tab title to the current directory & enable Shell Integration
 source ~/dotfiles/current-dir-in-iterm-tab-title.sh
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # Load rbenv automatically
 eval "$(rbenv init -)"
