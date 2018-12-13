@@ -5,7 +5,7 @@
 
 # Set the PS1 prompt
 
-export PS1="\[\033[31m\]\u \[\033[32m\]\w\[\033[33m\]\$(__git_ps1)\[\033[00m\] \n $ "
+export PS1="\n\[\033[31m\]\u \[\033[32m\]\w\[\033[33m\]\$(__git_ps1)\[\033[00m\] \n>> "
 
 # Add bash aliases.
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases

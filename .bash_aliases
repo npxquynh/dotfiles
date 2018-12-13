@@ -4,6 +4,11 @@
 alias reloadrc='source ~/.bashrc'
 alias editrc='vim ~/.bashrc'
 
+if [ -f ~/.bash_aliases_local ]
+then
+  source ~/.bash_aliases_local
+fi
+
 # https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 # To manipulate dotfiles directory
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
